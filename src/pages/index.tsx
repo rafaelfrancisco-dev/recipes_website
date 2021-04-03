@@ -38,7 +38,7 @@ function getRandomElements(sourceArray: Array<any>, neededElements: number) {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      recipeList: getRandomElements(recipes, 33)
+      recipeList: getRandomElements(recipes, 33).sort(compareRecipeTitle)
     }
   };
 };
@@ -54,7 +54,7 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
   >
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 pt-8">
-      {recipeList.sort(compareRecipeTitle).map((recipe: Recipe) => (
+      {recipeList.map((recipe: Recipe) => (
         <Link key={recipe.idMeal} href={"/recipes/" + recipe.idMeal}>
           <div className="w-full relative text-white overflow-hidden rounded-3xl flex shadow-lg">
             <div className="w-full flex md:flex-col bg-gradient-to-br from-purple-500 to-indigo-500">
@@ -62,12 +62,14 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
                 <p>{recipe.strMeal}</p>
               </div>
 
-              <div>
+              <div className="relative md:pl-6 xl:pl-8 hidden sm:block">
                 <Image
+                  className="absolute top-6 left-6 md:static overflow-visible"
                   src={recipe.strMealThumb}
                   alt={recipe.strMeal}
-                  width={100}
-                  height={100}
+                  width={352}
+                  height={232}
+                  layout="responsive"
                 />
               </div>
             </div>
