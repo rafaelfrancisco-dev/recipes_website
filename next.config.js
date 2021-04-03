@@ -11,4 +11,7 @@ module.exports = withBundleAnalyzer({
   env: {
     baseUrl: baseUrl,
   },
+  images: {
+    domains: ['www.themealdb.com'],
+  }
 });
