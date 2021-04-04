@@ -8,10 +8,10 @@ class StyleUtils {
     }
 
     if (remainder2 === 0) {
-      return 'from-pink-500 to-rose-500';
+      return 'from-pink-500 to-red-500';
     }
 
-    return 'from-yellow-400 to-orange-500';
+    return 'from-yellow-200 to-orange-500';
   }
 }
 
