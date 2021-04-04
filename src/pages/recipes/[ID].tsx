@@ -10,7 +10,7 @@ const recipes = require('../../models/recipes.json');
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const recipe = recipes.filter(
-    (element: Recipe) => String(element.idMeal) === context.params.ID,
+    (element: Recipe) => String(element.idMeal) === context.params?.ID,
   )[0];
 
   if (recipe === undefined) {
