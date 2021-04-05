@@ -3,20 +3,14 @@ import React from 'react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
-import { motion } from "framer-motion";
-
 import { Meta } from '../layout/Meta';
 import { Recipe } from '../models/Recipe';
 import StyleUtils from '../styles/StyleUtils';
 import { Main } from '../templates/Main';
 import FadeInImage from '../components/FadeInImage';
+import SearchBar from '../components/SearchBar';
 
 const recipes = require('../models/recipes.json');
-
-const scaleVariants = {
-  hidden: { scale: 0 },
-  visible: { scale: 1 },
-}
 
 type IndexPageProps = {
   recipeList: Array<Recipe>
@@ -63,10 +57,12 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
       />
     )}
   >
+    <SearchBar/>
+
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 pt-8">
       {recipeList.map((recipe: Recipe, index: number) => (
         <Link key={recipe.idMeal} href={`/recipes/${recipe.idMeal}`}>
-          <motion.div initial="hidden" animate="visible" variants={scaleVariants} className="w-full relative text-white overflow-hidden rounded-3xl flex shadow-lg">
+          <div className="w-full relative text-white overflow-hidden rounded-3xl flex shadow-lg">
             <div
               className={`w-full flex md:flex-col bg-gradient-to-br ${StyleUtils.getRandomGradientStyle(
                 index,
@@ -84,7 +80,7 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         </Link>
       ))}
     </div>
