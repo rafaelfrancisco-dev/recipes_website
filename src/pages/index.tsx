@@ -62,13 +62,13 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 pt-8">
       {recipeList.map((recipe: Recipe, index: number) => (
         <Link key={recipe.idMeal} href={`/recipes/${recipe.idMeal}`}>
-          <div className="w-full relative text-white overflow-hidden rounded-3xl flex shadow-lg">
+          <div className="transition duration-500 ease-in-out w-full relative text-white overflow-hidden rounded-3xl flex shadow-lg hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110">
             <div
               className={`w-full flex md:flex-col bg-gradient-to-br ${StyleUtils.getRandomGradientStyle(
                 index,
               )}`}
             >
-              <p className="pt-6 px-4 h-20 font-mono text-lg font-medium leading-none text-center text-black hover:text-red-500">{recipe.strMeal}</p>
+              <p className="pt-6 px-4 h-20 text-lg font-medium leading-none text-center text-black">{recipe.strMeal}</p>
 
               <div className="relative md:pl-6 xl:pl-8 hidden sm:block h-32">
                 <FadeInImage
