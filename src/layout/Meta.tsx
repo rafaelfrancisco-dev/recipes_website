@@ -37,6 +37,7 @@ const Meta = (props: IMetaProps) => (
       />
       <link rel="icon" href={`${process.env.baseUrl}/favicon.ico`} key="favicon" />
     </Head>
+
     <NextSeo
       title={props.title}
       description={props.description}

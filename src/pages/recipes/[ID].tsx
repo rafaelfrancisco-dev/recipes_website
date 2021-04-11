@@ -2,11 +2,10 @@ import React from 'react';
 
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
+import FadeInImage from '../../components/FadeInImage';
 import { Meta } from '../../layout/Meta';
 import { Recipe } from '../../models/Recipe';
 import { Main } from '../../templates/Main';
-
-import FadeInImage from '../../components/FadeInImage';
 
 const recipes = require('../../models/recipes.json');
 
@@ -69,9 +68,9 @@ const RecipePage = ({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) 
       <div className="my-4">
         <h3 className="font-mono mb-2">Instructions</h3>
 
-        {recipe.strInstructions.split("\\r\\n").map((i: string, key: any) => {
-          return <p key={key}>{i}</p>;
-        })}
+        {recipe.strInstructions.split('\\r\\n').map((i: string) => (
+          <p key={i}>{i}</p>
+        ))}
       </div>
     </article>
   </Main>

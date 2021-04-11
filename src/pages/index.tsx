@@ -3,24 +3,18 @@ import React from 'react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
+import FadeInImage from '../components/FadeInImage';
+import SearchBar from '../components/SearchBar';
 import { Meta } from '../layout/Meta';
 import { Recipe } from '../models/Recipe';
 import StyleUtils from '../styles/StyleUtils';
 import { Main } from '../templates/Main';
-import FadeInImage from '../components/FadeInImage';
-import SearchBar from '../components/SearchBar';
 
 const recipes = require('../models/recipes.json');
 
 type IndexPageProps = {
-  recipeList: Array<Recipe>
+  recipeList: Array<Recipe>;
 };
-
-export const getStaticProps: GetStaticProps<IndexPageProps> = async () => ({
-  props: {
-    recipeList: getRandomElements(recipes, 33).sort(compareRecipeTitle)
-  },
-});
 
 function compareRecipeTitle(a: Recipe, b: Recipe) {
   if (a.strMeal < b.strMeal) {
@@ -48,6 +42,12 @@ function getRandomElements(sourceArray: Array<any>, neededElements: number) {
   return result;
 }
 
+export const getStaticProps: GetStaticProps<IndexPageProps> = async () => ({
+  props: {
+    recipeList: getRandomElements(recipes, 33).sort(compareRecipeTitle),
+  },
+});
+
 const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <Main
     meta={(
@@ -57,7 +57,7 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
       />
     )}
   >
-    <SearchBar/>
+    <SearchBar />
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 pt-8">
       {recipeList.map((recipe: Recipe, index: number) => (
@@ -68,7 +68,9 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
                 index,
               )}`}
             >
-              <p className="pt-6 px-4 h-20 text-lg font-medium leading-none text-center text-black">{recipe.strMeal}</p>
+              <p className="pt-6 px-4 h-20 text-lg font-medium leading-none text-center text-black">
+                {recipe.strMeal}
+              </p>
 
               <div className="relative md:pl-6 xl:pl-8 hidden sm:block h-32">
                 <FadeInImage
