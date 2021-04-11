@@ -14,10 +14,10 @@ const Main = (props: IMainProps) => {
   const router = useRouter();
 
   return (
-    <div className="antialiased w-full text-gray-700">
+    <div className="w-full">
       {props.meta}
 
-      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-black bg-opacity-60">
+      <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto">
         {!(router.pathname === '/') && (
           <button
             aria-label="Enable Dark Mode"

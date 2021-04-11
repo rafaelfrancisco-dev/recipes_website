@@ -34,16 +34,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const RecipePage = ({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) => (
-  <Main
-    meta={(
-      <Meta
-        title="Next.js Boilerplate Presentation"
-        description="Next js Boilerplate is the perfect starer code for your project. Build your React application with Next.js framework."
-      />
-    )}
-  >
+  <Main meta={<Meta title={recipe.strMeal} description={recipe.strCategory} />}>
     <article className="prose lg:prose-xl">
-      <h1>{recipe.strMeal}</h1>
+      <h1 className="text-gray-900 dark:text-gray-100">{recipe.strMeal}</h1>
 
       <div className="relative md:pl-6 xl:pl-8 hidden sm:block h-64">
         <FadeInImage
