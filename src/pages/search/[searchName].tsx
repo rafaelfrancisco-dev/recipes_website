@@ -1,54 +1,63 @@
 import React from 'react';
 
-import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType, NextPage } from 'next';
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
 
+import RecipeBox from '../../components/RecipeBox';
 import { Meta } from '../../layout/Meta';
 import { Recipe } from '../../models/Recipe';
+import recipeList from '../../models/recipes.json';
 import { Main } from '../../templates/Main';
-import Link from 'next/link';
 
 function searchRecipes(name: string | string[]): Array<Recipe> {
-  const recipes = require('../../models/recipes.json');
-
   const searchName = typeof name === 'string' ? name.toLowerCase() : name[0].toLowerCase();
-  const foundArray = recipes.filter((e: Recipe) => e.strMeal.toLowerCase().includes(searchName));
+  const foundArray = recipeList.filter((e: Recipe) => e.strMeal.toLowerCase().includes(searchName));
 
   if (foundArray !== undefined) {
     return foundArray;
-  } else {
-    return [];
   }
+
+  return [];
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }: GetServerSidePropsContext) => ({
+// eslint-disable-next-line max-len
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+}: GetServerSidePropsContext) => ({
   props: {
     recipes: searchRecipes(params?.searchName === undefined ? '' : params.searchName),
-    searchedText: params?.searchName
-  }
+    searchedText: params?.searchName,
+  },
 });
 
-const SearchPage: NextPage = ({ recipes, searchedText }: InferGetServerSidePropsType<typeof getServerSideProps>) => (
+// eslint-disable-next-line max-len
+const SearchPage: NextPage = ({
+  recipes,
+  searchedText,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => (
   <Main
     meta={(
       <Meta
-        title='Next.js Boilerplate Presentation'
-        description='Next js Boilerplate is the perfect starer code for your project. Build your React application with Next.js framework.'
+        title="Next.js Boilerplate Presentation"
+        description="Next js Boilerplate is the perfect starer code for your project. Build your React application with Next.js framework."
       />
     )}
   >
     <div>
-      <p>Search for {searchedText}</p>
-      <p>Found {recipes.length} results</p>
+      <p>{`Searched for ${searchedText}`}</p>
+      <p>{`Found ${recipes.length} results`}</p>
 
       <br />
 
-      {recipes.map((r: Recipe, index: number) => (
-        <div key={index}>
-          <Link key={r.idMeal} href={`/recipes/${r.idMeal}`}>
-            <p>{r.strMeal}</p>
-          </Link>
-        </div>
-      ))}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 pt-8">
+        {recipes.map((r: Recipe) => (
+          <RecipeBox recipe={r} key={r.idMeal} />
+        ))}
+      </div>
     </div>
   </Main>
 );

@@ -7,12 +7,27 @@ export class RecipeMethods {
     Object.keys(recipe).forEach((key: string) => {
       if (key.includes('Ingredient')) {
         const val = (recipe as any)[key];
-        if (val !== undefined && val !== null) {
+        if (val !== undefined && val !== null && val !== '') {
           steps += 1;
         }
       }
     });
 
     return steps;
+  }
+
+  static getTags(recipe: Recipe): String[] {
+    const tags: String[] = [];
+
+    Object.keys(recipe).forEach((key: string) => {
+      if (key.includes('Ingredient')) {
+        const val = (recipe as any)[key];
+        if (val !== undefined && val !== null && val !== '') {
+          tags.push(val as String);
+        }
+      }
+    });
+
+    return tags;
   }
 }

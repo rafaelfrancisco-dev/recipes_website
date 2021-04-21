@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
 import FadeInImage from '../../components/FadeInImage';
 import { Meta } from '../../layout/Meta';
+import { RecipeMethods } from '../../models/logic/RecipeMethods';
 import { Recipe } from '../../models/Recipe';
 import { Main } from '../../templates/Main';
 
@@ -48,14 +49,16 @@ const RecipePage = ({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) 
       </div>
 
       <div className="my-4">
-        <h3 className="font-mono mb-2">Info</h3>
+        <h3 className="font-mono mb-2">Category</h3>
         <h5>{recipe.strCategory}</h5>
         <h5>{recipe.strTags}</h5>
       </div>
 
       <div className="my-4">
         <h3 className="font-mono mb-2">Ingredients</h3>
-        <p>Ingredients go here</p>
+        {RecipeMethods.getTags(recipe).map((ingredient: String) => (
+          <p className="mb-0 mt-0">{ingredient}</p>
+        ))}
       </div>
 
       <div className="my-4">
