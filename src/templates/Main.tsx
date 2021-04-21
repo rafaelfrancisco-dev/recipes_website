@@ -41,6 +41,10 @@ const Main = (props: IMainProps) => {
             <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">Home</a>
           </Link>
 
+          <Link href="/tags">
+            <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">Tags</a>
+          </Link>
+
           <Link href="/about/">
             <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">About</a>
           </Link>

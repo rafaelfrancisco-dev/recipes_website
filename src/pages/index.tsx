@@ -62,16 +62,12 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 pt-8">
       {recipeList.map((recipe: Recipe, index: number) => (
         <Link key={recipe.idMeal} href={`/recipes/${recipe.idMeal}`}>
-          <div className="transition duration-500 ease-in-out w-full relative text-white overflow-hidden rounded-3xl flex shadow-lg hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110">
+          <div className="transition duration-500 ease-in-out max-w-xs rounded overflow-hidden shadow-lg my-2 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-105">
             <div
               className={`w-full flex md:flex-col bg-gradient-to-br ${StyleUtils.getRandomGradientStyle(
                 index,
               )}`}
             >
-              <p className="pt-6 px-4 h-20 text-lg font-medium leading-none text-center text-black">
-                {recipe.strMeal}
-              </p>
-
               <div className="relative md:pl-6 xl:pl-8 hidden sm:block h-32">
                 <FadeInImage
                   className="absolute md:static overflow-visible"
@@ -80,6 +76,18 @@ const Index = ({ recipeList }: InferGetStaticPropsType<typeof getStaticProps>) =
                   layout="fill"
                   objectFit="cover"
                 />
+              </div>
+
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">{recipe.strMeal}</div>
+                <p className="text-grey-darker text-base">{recipe.strCategory}</p>
+              </div>
+
+              <div className="px-6 py-4">
+                <span className="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">{`#${recipe.strIngredient1}`}</span>
+                <span className="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">{`#${recipe.strIngredient2}`}</span>
+                <span className="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker">{`#${recipe.strIngredient3}`}</span>
+                <span className="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker">{`#${recipe.strIngredient4}`}</span>
               </div>
             </div>
           </div>
