@@ -47,15 +47,12 @@ export const getServerSideProps: GetStaticProps<IndexPageProps> = async () => ({
 });
 
 const Index = ({ recipeList }: InferGetStaticPropsType<typeof getServerSideProps>) => (
-  <Main
-    meta={(
-      <Meta
-        title="Next.js Boilerplate Presentation"
-        description="Next js Boilerplate is the perfect starer code for your project. Build your React application with Next.js framework."
-      />
-    )}
-  >
-    <SearchBar />
+  <Main meta={<Meta title="Recipes" description="Just a bunch of recipes" />}>
+    <article className="prose lg:prose-xl">
+      <h1 className="text-gray-900 dark:text-gray-100">Random recipes</h1>
+    </article>
+
+    <SearchBar className="mt-8" />
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 pt-8">
       {recipeList.map((recipe: Recipe) => (

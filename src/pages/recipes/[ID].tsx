@@ -56,16 +56,29 @@ const RecipePage = ({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) 
 
       <div className="my-4">
         <h3 className="font-mono mb-2">Ingredients</h3>
-        {RecipeMethods.getTags(recipe).map((ingredient: String) => (
-          <p className="mb-0 mt-0">{ingredient}</p>
-        ))}
+        <div className="grid grid-cols-3 gap-4 place-content-around justify-items-stretch">
+          {RecipeMethods.getTags(recipe).map((ingredient: String) => (
+            <div key={ingredient.toString()} className="flex space-x-3">
+              <FadeInImage
+                className="flex"
+                src={`https://www.themealdb.com/images/ingredients/${ingredient}.png`}
+                width={50}
+                height={50}
+                layout="fixed"
+              />
+
+              <span className="flex mb-0 mt-0">{ingredient}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="my-4">
         <h3 className="font-mono mb-2">Instructions</h3>
 
-        {recipe.strInstructions.split('\\r\\n').map((i: string) => (
-          <p key={i}>{i}</p>
+        {recipe.strInstructions.split('\\r\\n').map((i: string, index: number) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <p key={i + index}>{i}</p>
         ))}
       </div>
     </article>

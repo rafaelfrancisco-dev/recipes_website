@@ -28,6 +28,9 @@ export class RecipeMethods {
       }
     });
 
-    return tags;
+    const s = new Set(tags);
+    const it = s.values();
+
+    return Array.from(it);
   }
 }
