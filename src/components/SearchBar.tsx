@@ -1,8 +1,12 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { FormHTMLAttributes, SyntheticEvent, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-function SearchBar(props: any) {
+interface SearchBarProps extends FormHTMLAttributes<HTMLFormElement> {
+  changeFunction: (searchValue: string) => void;
+}
+
+function SearchBar(props: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('');
   const router = useRouter();
 
@@ -12,16 +16,15 @@ function SearchBar(props: any) {
   };
 
   return (
-    <form
-      /* eslint-disable-next-line react/jsx-props-no-spreading */
-      {...props}
-      onSubmit={searchRecipe}
-    >
+    <form className={props.className} onSubmit={searchRecipe}>
       <input
-        className="w-full h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg"
+        className="w-full h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow"
         type="search"
         defaultValue={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+          props.changeFunction(searchValue);
+        }}
         placeholder="Search..."
       />
     </form>
