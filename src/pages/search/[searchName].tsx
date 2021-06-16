@@ -10,21 +10,17 @@ import {
 import RecipeBox from '../../components/RecipeBox';
 import { Meta } from '../../layout/Meta';
 import { Recipe } from '../../models/Recipe';
-import recipeList from '../../models/recipes.json';
 import { Main } from '../../templates/Main';
+
+const json = require('../../models/recipes.json');
 
 function searchRecipes(name: string | string[]): Array<Recipe> {
   const searchName = typeof name === 'string' ? name.toLowerCase() : name[0].toLowerCase();
-  const foundArray = recipeList.filter((e: Recipe) => e.strMeal.toLowerCase().includes(searchName));
+  const foundArray = json.filter((e: Recipe) => e.strMeal.toLowerCase().includes(searchName));
 
-  if (foundArray !== undefined) {
-    return foundArray;
-  }
-
-  return [];
+  return foundArray ?? [];
 }
 
-// eslint-disable-next-line max-len
 export const getServerSideProps: GetServerSideProps = async ({
   params,
 }: GetServerSidePropsContext) => ({
