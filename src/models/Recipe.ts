@@ -32,7 +32,7 @@ export interface Recipe {
   strMeasure14: number | null | string;
   strMeasure8: number | null | string;
   strMeal: string;
-  strImageSource: null;
+  strImageSource: string;
   strMeasure18: null | string;
   strSource: null | string;
   strMeasure1: number | string;

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Image from 'next/image';
 
-import FadeInImage from '../../components/FadeInImage';
 import { Meta } from '../../layout/Meta';
 import { RecipeMethods } from '../../models/logic/RecipeMethods';
 import { Recipe } from '../../models/Recipe';
@@ -40,9 +40,11 @@ const RecipePage = ({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) 
       <h1 className="text-gray-900 dark:text-gray-100">{recipe.strMeal}</h1>
 
       <div className="relative md:pl-6 xl:pl-8 hidden sm:block h-64">
-        <FadeInImage
+        <Image
           src={recipe.strMealThumb}
           alt={recipe.strMeal}
+          placeholder="blur"
+          blurDataURL={recipe.strMealThumb}
           layout="fill"
           objectFit="cover"
         />
@@ -59,7 +61,7 @@ const RecipePage = ({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) 
         <div className="grid grid-cols-3 gap-4 place-content-around justify-items-stretch">
           {RecipeMethods.getTags(recipe).map((ingredient: String) => (
             <div key={ingredient.toString()} className="flex space-x-3">
-              <FadeInImage
+              <Image
                 className="flex"
                 src={`https://www.themealdb.com/images/ingredients/${ingredient}.png`}
                 width={50}

@@ -1,10 +1,10 @@
 import React from 'react';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { RecipeMethods } from '../models/logic/RecipeMethods';
 import { Recipe } from '../models/Recipe';
-import FadeInImage from './FadeInImage';
 
 type RecipeBoxProps = {
   recipe: Recipe;
@@ -15,10 +15,12 @@ const RecipeBox = (props: RecipeBoxProps) => (
     <div className="transition duration-500 ease-in-out max-w-xs rounded overflow-hidden shadow-lg my-2 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
       <div>
         <div className="relative md:pl-6 xl:pl-8 hidden sm:block h-48">
-          <FadeInImage
+          <Image
             className="absolute md:static overflow-visible"
             src={props.recipe.strMealThumb}
             alt={props.recipe.strMeal}
+            placeholder="blur"
+            blurDataURL={props.recipe.strMealThumb}
             layout="fill"
             objectFit="cover"
           />
@@ -29,9 +31,7 @@ const RecipeBox = (props: RecipeBoxProps) => (
 
           <p className="text-grey-darker text-base">{props.recipe.strCategory}</p>
           <p className="text-grey-darker text-base">
-            {`${RecipeMethods.getNumberOfIngredients(
-              props.recipe,
-            )} ingredients`}
+            {`${RecipeMethods.getNumberOfIngredients(props.recipe)} ingredients`}
           </p>
         </div>
 
